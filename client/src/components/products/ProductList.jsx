@@ -26,8 +26,8 @@ const ProductList = ({
     try {
       setLoading(true)
       let apiUrl = URL;
-      if (categoryState.category !== "") {
-        apiUrl += `/${categoryState.category}`;
+      if (categoryState.category !== "") {       
+        apiUrl += `/items/category/${categoryState.category}`;
       }
       else {
         apiUrl += `/items`;
@@ -35,10 +35,12 @@ const ProductList = ({
       const response = await fetch(apiUrl);
       const result = await response.json();
       console.log(result)
-      if (result && result[0].products && result[0].products.length > 0) {
-        setProducts(result[0].products);
-        setProductItems(result[0].products);
-        setDefaultSort(result[0].products);
+      console.log(categoryState.category)
+
+      if (result && result.length > 0) {
+        setProducts(result);
+        setProductItems(result);
+        setDefaultSort(result);
         setLoading(false);
       }
     } catch (e) {

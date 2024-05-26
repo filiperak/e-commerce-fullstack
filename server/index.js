@@ -30,49 +30,31 @@ app.get('/category', (req, res) => {
     .catch(e => res.status(500).json({ error: e.message }));
 });
 
-// app.get('/:category', (req, res) => {
-//     const category = req.params.category;
-//     ItemModel.find({ category: category })
-//         .then(items => res.json(items))
-//         .catch(err => res.status(500).json({ error: err.message }));
-// });
+app.get('/items/:id', (req, res) => {
+    const { id } = req.params;
 
-app.get('/:category', (req, res) => {
-    const category = req.params.category;
-    ItemModel.find({ category: category })
-    .then(items => {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ error: 'los id' });
+    }
+  
+    ItemModel.findById(id)
+      .then(item => {
+        if (!item) {
+          return res.status(404).json({ error: 'Item not found' });
+        }
+        res.json(item);
+      })
+      .catch(e => res.status(500).json({ error: e.message }));
+  });
+
+  app.get('/items/category/:categoryName', (req, res) => {
+    const { categoryName } = req.params;
+    ItemModel.find({ category: categoryName })
+      .then(items => {
         if (!items || items.length === 0) {
-            return res.status(404).json({ message: 'no items' });
+          return res.status(404).json({ message: 'No items found' });
         }
         res.json(items);
-    })
-    .catch(err => res.status(500).json({ error: err.message }));
-});
-
-// app.get('items?id=:productId', (req, res) => {
-//     const productId = req.params.productId;
-//     ItemModel.find({ id: productId })
-//         .then(items => {
-//             if (!items || items.length === 0) {
-//                 return res.status(404).json({ message: 'no items' });
-//             }
-//             res.json(items);
-//         })
-//         .catch(err => res.status(500).json({ error: err.message }));
-// });
-
-app.get('/items/:productId', (req, res) => {
-    const productId = req.params.productId;
-
-    // Find the item with the specified productId
-    const item = items.find(item => item.products.some(product => product.id === Number(productId)));
-
-    if (!item) {
-        return res.status(404).json({ message: 'Item not found' });
-    }
-
-    // Find the product within the item's products array
-    const product = item.products.find(product => product.id === Number(productId));
-
-    res.json(product);
-});
+      })
+      .catch(e => res.status(500).json({ error: e.message }));
+  });

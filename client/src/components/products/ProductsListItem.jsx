@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 const ProductsListItem = ({data}) => {
   return (
    <ProductsListItemContainer>
-        <Link to={`/product/${data.id}`}>
+        <Link to={`/product/${data._id}`}>
         <img src={data.thumbnail} alt={data.title} />
         <ProductListItemInfo>
           <div>

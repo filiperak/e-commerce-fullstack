@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { api } from "../../../services/api";
 import {
@@ -25,7 +25,7 @@ const SingleProduct = () => {
   async function fetchSingleProduct() {
     try {
       setLoading(true)
-      const response = await fetch(`${api}/item/${productId}`); 
+      const response = await fetch(`${api}/items/${productId}`); 
       const result = await response.json();
       if (result) {
         setSingleProduct(result);
@@ -36,7 +36,7 @@ const SingleProduct = () => {
       setLoading(false);
     }
   }
-  useState(() => {
+  useEffect(() => {
     fetchSingleProduct();
   }, []);
 
