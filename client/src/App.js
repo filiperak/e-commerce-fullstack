@@ -7,6 +7,7 @@ import { CategoryContextProvider } from "./context/CategoryContext";
 import { useState } from "react";
 import SingleProduct from "./components/views/singleProduct/SingleProduct";
 import CartContextProvider from "./context/CartContext";
+import Admin from "./components/views/admin/Admin";
 
 function App() {
   const [searchInput, setSearchInput] = useState([]);
@@ -19,6 +20,7 @@ function App() {
             <Header handleInput={setSearchInput} productItems={productItems} />
             <Routes>
               <Route path="/cart" element={<Cart />} />
+              <Route path="/admin" element={<Admin/>}/>
               <Route
                 path="/"
                 element={

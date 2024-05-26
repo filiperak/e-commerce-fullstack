@@ -34,8 +34,6 @@ const ProductList = ({
       }
       const response = await fetch(apiUrl);
       const result = await response.json();
-      console.log(result)
-      console.log(categoryState.category)
 
       if (result && result.length > 0) {
         setProducts(result);

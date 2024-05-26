@@ -77,7 +77,7 @@ const Header = ({ handleInput, productItems }) => {
         <SearchIcon onClick={handleSubmit}/>
       </SearchBar>
       <HeaderRigth>
-        <PersonOutlineIcon />
+        <PersonOutlineIcon onClick={() => navigate('/admin')}/>
         <ShoppingCartIcon onClick={() => navigate("/cart")} />
         <span>{cartState && cartState.length}</span>
       </HeaderRigth>

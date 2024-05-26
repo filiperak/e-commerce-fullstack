@@ -4,6 +4,6 @@
   "thumbnail":"",
   "rating":1,
   "images":[],
-  "description","",
-  "brand","brand",
+  "description":"",
+  "brand":"brand",
   	"id":"",
