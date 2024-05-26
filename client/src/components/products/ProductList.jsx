@@ -25,18 +25,19 @@ const ProductList = ({
   async function fetchProducts(URL) {
     try {
       setLoading(true)
-      let apiUrl = URL;
-      if (categoryState.category !== "") {
-        apiUrl += `/category/${categoryState.category}`;
-      } else {
-        apiUrl += `?limit=194`;
-      }
+      let apiUrl = URL += '/items';
+      // if (categoryState.category !== "") {
+      //   apiUrl += `/category/${categoryState.category}`;
+      // } else {
+      //   apiUrl += `?limit=194`;
+      // }
       const response = await fetch(apiUrl);
       const result = await response.json();
-      if (result && result.products && result.products.length > 0) {
-        setProducts(result.products);
-        setProductItems(result.products);
-        setDefaultSort(result.products);
+      console.log(result)
+      if (result && result[0].products && result[0].products.length > 0) {
+        setProducts(result[0].products);
+        setProductItems(result[0].products);
+        setDefaultSort(result[0].products);
         setLoading(false);
       }
     } catch (e) {
