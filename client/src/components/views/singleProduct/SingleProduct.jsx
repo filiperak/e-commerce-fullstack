@@ -25,7 +25,7 @@ const SingleProduct = () => {
   async function fetchSingleProduct() {
     try {
       setLoading(true)
-      const response = await fetch(`${api}/${productId}`);
+      const response = await fetch(`${api}/item/${productId}`); 
       const result = await response.json();
       if (result) {
         setSingleProduct(result);

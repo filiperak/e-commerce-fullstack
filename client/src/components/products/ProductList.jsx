@@ -25,12 +25,13 @@ const ProductList = ({
   async function fetchProducts(URL) {
     try {
       setLoading(true)
-      let apiUrl = URL += '/items';
-      // if (categoryState.category !== "") {
-      //   apiUrl += `/category/${categoryState.category}`;
-      // } else {
-      //   apiUrl += `?limit=194`;
-      // }
+      let apiUrl = URL;
+      if (categoryState.category !== "") {
+        apiUrl += `/${categoryState.category}`;
+      }
+      else {
+        apiUrl += `/items`;
+      }
       const response = await fetch(apiUrl);
       const result = await response.json();
       console.log(result)
@@ -43,6 +44,7 @@ const ProductList = ({
     } catch (e) {
       setLoading(false)
       setErrorMsg(e.message);
+      console.log(e.message);
     }
   }
 
