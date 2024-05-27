@@ -13,6 +13,18 @@ export const AdminContainer = styled.form`
     padding: 0 4px;
   }
   >input{
-    margin-top:8px;
+    margin:2px;
+  }
+  p{
+    margin: 0;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+  >#add-item-btn{
+    background-color: var(--main-orange);
+    border: none;
+    padding: 3px;
+    font-weight: 600;
+
   }
 `;

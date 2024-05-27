@@ -61,6 +61,7 @@ const Admin = () => {
   return (
     <AdminContainer onSubmit={handleSubmit} style={{ marginTop: '100px' }}>
       <h3>Create new item</h3>
+      <p>Enter item id</p>
       <input
         type="number"
         value={newItem.id}
@@ -69,6 +70,7 @@ const Admin = () => {
         onChange={handleChange}
         required
       />
+            <p>Enter item title</p>
       <input
         type="text"
         value={newItem.title}
@@ -77,6 +79,7 @@ const Admin = () => {
         onChange={handleChange}
         required
       />
+            <p>Enter item category</p>
       <input
         type="text"
         value={newItem.category}
@@ -85,6 +88,7 @@ const Admin = () => {
         onChange={handleChange}
         required
       />
+          <p>Enter item price</p>
       <input
         type="number"
         value={newItem.price}
@@ -93,6 +97,8 @@ const Admin = () => {
         onChange={handleChange}
         required
       />
+            <p>Enter item thumbnail image</p>
+
       <input
         type="text"
         value={newItem.thumbnail}
@@ -101,6 +107,7 @@ const Admin = () => {
         onChange={handleChange}
         required
       />
+                  <p>Enter item rating</p>
       <input
         type="number"
         value={newItem.rating}
@@ -109,6 +116,7 @@ const Admin = () => {
         onChange={handleChange}
         required
       />
+                  <p>Enter item image</p>
       <input
         type="text"
         value={newItem.images}
@@ -117,6 +125,7 @@ const Admin = () => {
         onChange={handleChange}
         required
       />
+                  <p>Enter item description</p>
       <input
         type="text"
         value={newItem.description}
@@ -125,6 +134,7 @@ const Admin = () => {
         onChange={handleChange}
         required
       />
+                  <p>Enter item brand</p>
       <input
         type="text"
         value={newItem.brand}
@@ -133,7 +143,7 @@ const Admin = () => {
         onChange={handleChange}
         required
       />
-      <input type="submit" value="SEND" />
+      <input type="submit" value="ADD NEW ITEM" id='add-item-btn' />
     </AdminContainer>
   );
 };
