@@ -8,7 +8,7 @@ const Sort = ({ numOfProducts , setSortVal,sortVal}) => {
   }
   return (
     <SortBar>
-      <p>{`${numOfProducts} out of 194 products`}</p>
+      <p>{`${numOfProducts} results found`}</p>
       <SortSelect>
         <p>Sort by:</p>
         <select name="selectSort" value={sortVal} onChange={handleChange}>

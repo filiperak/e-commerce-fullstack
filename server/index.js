@@ -41,7 +41,7 @@ app.get("/items/:id", (req, res) => {
   ItemModel.findById(id)
     .then((item) => {
       if (!item) {
-        return res.status(404).json({ error: "Item not found" });
+        return res.status(404).json({ error: "no items" });
       }
       res.json(item);
     })
@@ -53,7 +53,7 @@ app.get("/items/category/:categoryName", (req, res) => {
   ItemModel.find({ category: categoryName })
     .then((items) => {
       if (!items || items.length === 0) {
-        return res.status(404).json({ message: "No items found" });
+        return res.status(404).json({ message: "no items" });
       }
       res.json(items);
     })
@@ -61,9 +61,8 @@ app.get("/items/category/:categoryName", (req, res) => {
 });
 
 app.post('/add',(req,res) => {
-    const task = req.body.tast;
-    ItemModel.create({
-
-    }).then(result => res.json())
+    const newItem = req.body;
+    ItemModel.create(newItem)
+    .then(res => res.json())
     .catch(e => res.json(e))
 })

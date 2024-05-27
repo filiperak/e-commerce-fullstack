@@ -12,4 +12,7 @@ export const AdminContainer = styled.form`
     flex-direction: column;
     padding: 0 4px;
   }
+  >input{
+    margin-top:8px;
+  }
 `;
