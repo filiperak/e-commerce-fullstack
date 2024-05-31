@@ -1,0 +1,16 @@
+GET http://localhost:5000/items
+
+###
+
+POST http://localhost:5000/items
+Content-Type: application/json
+
+{
+    "title": "testtitle2",
+    "category": "testcategory",
+    "price": 2,
+    "thumbnail": "testthumbnail",
+    "images": ["images","2"],
+    "brand": "testbrand",
+    "description": "testdescription"
+}
