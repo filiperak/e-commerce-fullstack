@@ -33,6 +33,32 @@ router.post('/', async (req,res) => {
     }
 })
 
+router.patch('/:id', getItems, async (req, res) => {
+    const updates = ['title', 'category', 'price', 'thumbnail', 'images', 'brand', 'description'];
+    
+    updates.forEach(elem => {
+        if (req.body[elem] != null) {
+            res.item[elem] = req.body[elem];
+        }
+    });
+
+    try {
+        const updatedItem = await res.item.save();
+        res.json(updatedItem);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+});
+
+router.delete('/:id',getItems,async (req,res) => {
+    try{
+        await res.item.deleteOne();
+        res.json({message:'deleted item'})
+    }catch(error){
+        res.status(400).json({ message: error.message });
+    }
+})
+
 async function getItems(req,res,next){
     let item;
     try{

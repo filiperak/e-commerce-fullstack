@@ -14,3 +14,16 @@ Content-Type: application/json
     "brand": "testbrand",
     "description": "testdescription"
 }
+
+
+###
+
+PATCH http://localhost:5000/items/6659db87ca58f59594e85527
+Content-Type: application/json
+
+{
+    "title":"NOVO PROMENJEN NASLOV22223"
+}
+
+###
+DELETE http://localhost:5000/items/6659db87ca58f59594e85527
