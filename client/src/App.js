@@ -8,6 +8,9 @@ import { useState } from "react";
 import SingleProduct from "./components/views/singleProduct/SingleProduct";
 import CartContextProvider from "./context/CartContext";
 import Admin from "./components/views/admin/Admin";
+import AddItem from "./components/views/admin/AddItem";
+import Edititem from "./components/views/admin/Edititem";
+
 
 function App() {
   const [searchInput, setSearchInput] = useState([]);
@@ -21,6 +24,8 @@ function App() {
             <Routes>
               <Route path="/cart" element={<Cart />} />
               <Route path="/admin" element={<Admin/>}/>
+              <Route path="/admin/new" element={<AddItem/>}/>
+              <Route path="/admin/edit" element={<Edititem/>}/>
               <Route
                 path="/"
                 element={

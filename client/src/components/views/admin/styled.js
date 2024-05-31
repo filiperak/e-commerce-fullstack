@@ -1,4 +1,4 @@
-const { default: styled } = require("styled-components");
+import styled from "styled-components";
 
 export const AdminContainer = styled.form`
   margin-top: var(--main-component-margin);
@@ -12,19 +12,12 @@ export const AdminContainer = styled.form`
     flex-direction: column;
     padding: 0 4px;
   }
-  >input{
-    margin:2px;
-  }
-  p{
-    margin: 0;
-    font-size: 0.8rem;
-    font-weight: 600;
-  }
-  >#add-item-btn{
+  > .MuiButtonBase-root {
+    color: #000;
     background-color: var(--main-orange);
-    border: none;
-    padding: 3px;
-    font-weight: 600;
-
+    margin: 4px !important;
+    padding: 4px !important;
+    font-weight: 800;
+    margin-left: auto;
   }
 `;

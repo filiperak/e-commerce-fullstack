@@ -43,18 +43,18 @@ const SingleProduct = () => {
   const handleAdd = () => {
     let productAdded = false;
     for(let i = 0; i < cartState.length; i++){
-      if(cartState[i].id === singleProduct.id){
+      if(cartState[i].id === singleProduct._id){
         productAdded = true;
         break;
       }
     }
     if(productAdded){
-      cartDispatch({type:'ADD_QUANTITY',id:singleProduct.id})
+      cartDispatch({type:'ADD_QUANTITY',id:singleProduct._id})
     }else{
         cartDispatch({
           type:'ADD_TO_CART',
           payload : {
-            id:singleProduct.id,
+            id:singleProduct._id,
             quantity:cartCount,
             title:singleProduct.title,
             price:singleProduct.price,
