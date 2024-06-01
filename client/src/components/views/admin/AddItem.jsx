@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
-import { AdminContainer } from './styled';
+import { AdminContainer, EditContainerTitle, EditDescription, EditInputField, EditProductDetails, EdititemContainer, EdititemImages, EdititemProductData } from './styled';
 import { api } from '../../../services/api';
+import ProductNav from '../../products/ProductNav';
+import AdminEditHeader from '../../adminComponents/AdminEditHeader';
+import { useNavigate } from 'react-router-dom';
 
 const AddItem = () => {
+  const navigate = useNavigate()
   const [newItem, setNewItem] = useState({
     title: "",
     category: "",
@@ -55,9 +59,53 @@ const AddItem = () => {
       console.error('Error:', error.message);
     }
   };
+  const handleCancle = () => {
+    navigate('/admin')
+  }
 
   return (
-    <AdminContainer onSubmit={handleSubmit} style={{ marginTop: '100px' }}>
+  <>
+  <ProductNav prev={'admin'}/>
+  <AdminEditHeader 
+ onCancel={handleCancle} text={'Create New Product'} btnTxt={'Add Product'}/>
+  <EdititemContainer>
+        <EdititemImages>
+          <EditContainerTitle>Product Images</EditContainerTitle>
+          123
+        </EdititemImages>
+        <EdititemProductData>
+          <EditContainerTitle>Product Details</EditContainerTitle>
+          <EditProductDetails>
+            <EditInputField>
+              <label htmlFor="title">Product title</label>
+              <input type="text" name="title" id="title" />
+            </EditInputField>
+
+            <EditInputField>
+              <label htmlFor="brand">Product Brand</label>
+              <input type="text" name="brand" id="brand"  />
+            </EditInputField>
+            <EditInputField>
+              <label htmlFor="price">Product price</label>
+              <input type="text" name="price" id="price"  />
+            </EditInputField>
+            <EditInputField>
+              <label htmlFor="rating">Product rating</label>
+              <input type="text" name="rating" id="rating" />
+            </EditInputField>
+            <EditInputField>
+              <label htmlFor="category">Product category</label>
+              <input type="text" name="category" id="category" />
+            </EditInputField>
+          </EditProductDetails>
+          <EditDescription>
+            <p>Product Description</p>
+            <textarea name="description" id="description"></textarea>
+          </EditDescription>
+        </EdititemProductData>
+      </EdititemContainer>
+
+ <AdminContainer onSubmit={handleSubmit} style={{ marginTop: '100px' }}>
       <h3>Create new item</h3>
             <p>Enter item title</p>
       <input
@@ -134,6 +182,8 @@ const AddItem = () => {
       />
       <input type="submit" value="ADD NEW ITEM" id='add-item-btn' />
     </AdminContainer>
+  </>
+   
   );
 };
 

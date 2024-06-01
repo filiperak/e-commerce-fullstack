@@ -37,8 +37,8 @@ const Edititem = () => {
   }
   return (
     <>
-      <ProductNav productName={item.title} prev={'admin'}/>
-    <AdminEditHeader onCancel={handleCancle}/>
+      <ProductNav productName={item.title} prev={'admin'} />
+    <AdminEditHeader onCancel={handleCancle} text={'Edit Product'} btnTxt={'Save Changes'}/>
       <EdititemContainer>
         <EdititemImages>
           <EditContainerTitle>Edit Product Images</EditContainerTitle>
