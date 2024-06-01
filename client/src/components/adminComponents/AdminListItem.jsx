@@ -1,7 +1,7 @@
 import React from 'react'
 import { AdminItemLeft, AdminItemRigth, AdminProductListItemContainer } from './styled'
 import { Button } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { api } from '../../services/api'
 
 
@@ -17,7 +17,9 @@ const AdminListItem = ({data,handleDelete}) => {
             <p>{`$${data.price}`}</p>
         </AdminItemLeft>
         <AdminItemRigth>
-            <Button onClick={() => navigate('/admin/edit')}>Edit</Button>
+          <Link to={`/admin/edit/${data._id}`}>
+          <Button>Edit</Button>
+          </Link>
             <Button onClick={() => handleDelete(data._id,api)}>Delete</Button>
         </AdminItemRigth>
     </AdminProductListItemContainer>

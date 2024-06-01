@@ -30,7 +30,6 @@ const AdminProductList = () => {
           });
           
           if (response.ok) {
-            alert('item deleted')
             getProducts(URL)
           } else {
             console.error('Failed to delete');

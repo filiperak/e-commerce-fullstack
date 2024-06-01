@@ -36,5 +36,10 @@ export const AdminItemRigth = styled.div`
 
   & .MuiButtonBase-root:last-child {
     background-color: #f77f7f !important;
+  
+  }
+  >a{
+    padding: 0;
+    margin: 0;
   }
 `;
