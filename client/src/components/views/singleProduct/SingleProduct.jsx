@@ -69,7 +69,7 @@ const SingleProduct = () => {
   if(errorMsg !== null) return <Error msg={errorMsg}/>
   return (
     <>
-      <ProductNav productName={singleProduct.title}/>
+      <ProductNav productName={singleProduct.title} prev={''}/>
       <SingleProductContainer>
         <ImageSlider imageData={singleProduct.images} />
         <SingleProductData>

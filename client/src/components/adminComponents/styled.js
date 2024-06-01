@@ -7,8 +7,8 @@ export const AdminProductListContainer = styled.ul`
   
 `;
 export const AdminProductListItemContainer = styled.li`
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
-  border-radius: 4px;
+  border-radius: 2px;
+  border: 1px solid var(--main-gray);
   padding: 4px;
   margin: 4px;
   list-style: none;
@@ -23,23 +23,56 @@ export const AdminItemRigth = styled.div`
   display: flex;
   justify-content: space-between;
 
-  & .MuiButtonBase-root {
-    color: #000;
-    margin: 4px !important;
-    padding: 4px !important;
-    font-weight: 800;
+  :first-child{
+    text-decoration: none;
+    margin-right: 2px;
+    &:hover{
+      color: lightblue;
+    }
   }
+  span{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+    border: 1.5px solid var(--main-gray);
+    height: 50%;
+    font-size: 0.8rem;
+    color: rgb(136, 136, 136);
+    padding: 3px;
+    cursor: pointer;
+  }
+  .admin-delete-btn{
 
-  & .MuiButtonBase-root:first-child {
-    background-color: #b6e9b6 !important;
+    &:hover{
+      color: red;
+    }
   }
+`;
 
-  & .MuiButtonBase-root:last-child {
-    background-color: #f77f7f !important;
-  
+export const EditHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+  padding: 8px;
+  margin-top: 14px;
+  >h4{
+    margin: 0
   }
-  >a{
-    padding: 0;
-    margin: 0;
+  span{
+    padding: 4px;
+    border-radius: 4px;
+    background-color: var(--main-gray);
+    margin: 0 3px;
+    cursor: pointer;
+  }
+  #save-changes{
+    background-color: var(--main-orange);
+
   }
 `;

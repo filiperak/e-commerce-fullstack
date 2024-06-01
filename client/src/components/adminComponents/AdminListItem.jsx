@@ -3,6 +3,8 @@ import { AdminItemLeft, AdminItemRigth, AdminProductListItemContainer } from './
 import { Button } from '@mui/material'
 import { Link, useNavigate } from 'react-router-dom'
 import { api } from '../../services/api'
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
 const AdminListItem = ({data,handleDelete}) => {
@@ -18,9 +20,16 @@ const AdminListItem = ({data,handleDelete}) => {
         </AdminItemLeft>
         <AdminItemRigth>
           <Link to={`/admin/edit/${data._id}`}>
-          <Button>Edit</Button>
+          <span>
+            <ModeEditIcon/>Edit
+          </span>
           </Link>
-            <Button onClick={() => handleDelete(data._id,api)}>Delete</Button>
+            <span 
+            className='admin-delete-btn'
+            onClick={() => handleDelete(data._id,api)}>
+              <DeleteIcon/>
+              Delete
+              </span>
         </AdminItemRigth>
     </AdminProductListItemContainer>
   )
