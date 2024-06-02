@@ -25,7 +25,7 @@ const Cart = () => {
   }
   return (
     <>
-      <ProductNav prev={''} />
+      <ProductNav prev={'cart'} />
       <CartContainer>
         <ShoppingCart>
           <CartHeader>

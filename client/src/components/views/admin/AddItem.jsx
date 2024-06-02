@@ -19,9 +19,9 @@ const AddItem = () => {
   const [newItem, setNewItem] = useState({
     title: "",
     category: "",
-    price: null,
+    price: 0,
     thumbnail: "",
-    rating: null,
+    rating: 0,
     images: [],
     description: "",
     brand: "",
@@ -31,14 +31,13 @@ const AddItem = () => {
     const { name, value } = e.target;
     setNewItem((prevState) => ({
       ...prevState,
-      [name]: value,
+      [name]: name === 'price' || name === 'rating' ? parseFloat(value) : value,
     }));
   };
 
-  const handleSubmit = async () => {
-    //e.preventDefault();
-    console.log(newItem);
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(JSON.stringify(newItem));
     try {
       const response = await fetch(`${api}/items/`, {
         method: "POST",
@@ -49,89 +48,97 @@ const AddItem = () => {
       });
 
       if (!response.ok) {
-        throw new Error("failed");
+        throw new Error("Failed to add item");
       }
 
       setNewItem({
         title: "",
         category: "",
-        price: null,
+        price: 0,
         thumbnail: "",
-        rating: null,
+        rating: 0,
         images: [],
         description: "",
         brand: "",
       });
 
-      console.log("item added");
+      console.log("Item added");
+      navigate("/admin");
     } catch (error) {
       console.error("Error:", error.message);
     }
   };
-  const handleCancle = () => {
+
+  const handleCancel = () => {
     navigate("/admin");
+  };
+
+  const headerData = {
+    text: "Create New Product",
+    btnText: "Add Product",
+    cancelFunction: handleCancel,
+    submitFunction: handleSubmit,
   };
 
   return (
     <>
       <ProductNav prev={"admin"} />
-      <AdminEditHeader
-        onCancel={handleCancle}
-        onSave={handleSubmit}
-        text={"Create New Product"}
-        btnTxt={"Add Product"}
-      />
+      <AdminEditHeader headerData={headerData} />
       <EdititemContainer>
         <EdititemImages>
           <EditContainerTitle>Product Images</EditContainerTitle>
-          123
+          {/* Additional UI for adding images can go here */}
         </EdititemImages>
         <EdititemProductData>
           <EditContainerTitle>Product Details</EditContainerTitle>
           <EditProductDetails>
             <EditInputField>
-              <label htmlFor="title">Product title</label>
+              <label htmlFor="title">Product Title</label>
               <input
                 type="text"
                 name="title"
                 id="title"
+                value={newItem.title}
                 onChange={handleChange}
               />
             </EditInputField>
-
             <EditInputField>
               <label htmlFor="brand">Product Brand</label>
               <input
                 type="text"
                 name="brand"
                 id="brand"
+                value={newItem.brand}
                 onChange={handleChange}
               />
             </EditInputField>
             <EditInputField>
-              <label htmlFor="price">Product price</label>
+              <label htmlFor="price">Product Price</label>
               <input
                 type="text"
                 name="price"
                 id="price"
+                value={newItem.price}
                 onChange={handleChange}
               />
             </EditInputField>
             <EditInputField>
-              <label htmlFor="rating">Product rating</label>
+              <label htmlFor="rating">Product Rating</label>
               <input
                 type="text"
                 name="rating"
                 id="rating"
+                value={newItem.rating}
                 onChange={handleChange}
               />
             </EditInputField>
             <EditInputField>
-              <label htmlFor="category">Product category</label>
+              <label htmlFor="category">Product Category</label>
               <input
                 type="text"
                 name="category"
                 id="category"
+                value={newItem.category}
                 onChange={handleChange}
               />
             </EditInputField>
@@ -141,89 +148,12 @@ const AddItem = () => {
             <textarea
               name="description"
               id="description"
+              value={newItem.description}
               onChange={handleChange}
-            ></textarea>
+            />
           </EditDescription>
         </EdititemProductData>
       </EdititemContainer>
-{/* 
-      <AdminContainer onSubmit={handleSubmit} style={{ marginTop: "100px" }}>
-        <h3>Create new item</h3>
-        <p>Enter item title</p>
-        <input
-          type="text"
-          value={newItem.title}
-          name="title"
-          placeholder="Title"
-          onChange={handleChange}
-          required
-        />
-        <p>Enter item category</p>
-        <input
-          type="text"
-          value={newItem.category}
-          name="category"
-          placeholder="Category"
-          onChange={handleChange}
-          required
-        />
-        <p>Enter item price</p>
-        <input
-          type="number"
-          value={newItem.price}
-          name="price"
-          placeholder="Price"
-          onChange={handleChange}
-          required
-        />
-        <p>Enter item thumbnail image</p>
-
-        <input
-          type="text"
-          value={newItem.thumbnail}
-          name="thumbnail"
-          placeholder="Thumbnail"
-          onChange={handleChange}
-          required
-        />
-        <p>Enter item rating</p>
-        <input
-          type="number"
-          value={newItem.rating}
-          name="rating"
-          placeholder="Rating"
-          onChange={handleChange}
-          required
-        />
-        <p>Enter item image</p>
-        <input
-          type="text"
-          value={newItem.images}
-          name="images"
-          placeholder="Images"
-          onChange={handleChange}
-          required
-        />
-        <p>Enter item description</p>
-        <input
-          type="text"
-          value={newItem.description}
-          name="description"
-          placeholder="Description"
-          onChange={handleChange}
-          required
-        />
-        <p>Enter item brand</p>
-        <input
-          type="text"
-          value={newItem.brand}
-          name="brand"
-          placeholder="Brand"
-          onChange={handleChange}
-          required
-        />
-        <input type="submit" value="ADD NEW ITEM" id="add-item-btn" />
-      </AdminContainer> */}
     </>
   );
 };

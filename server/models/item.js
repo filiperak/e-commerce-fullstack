@@ -15,7 +15,6 @@ const ItemSchema = new mongoose.Schema({
    },
    thumbnail:{
     type:String,
-    required:true
    },
    images:[String],
    brand:String,

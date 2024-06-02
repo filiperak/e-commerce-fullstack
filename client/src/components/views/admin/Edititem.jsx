@@ -17,6 +17,9 @@ import AdminEditHeader from "../../adminComponents/AdminEditHeader";
 const Edititem = () => {
   const { _id } = useParams();
   const [item, setItem] = useState({});
+  const [editedItem,setEditedItem] = useState({
+    
+  })
   const navigate = useNavigate()
   async function getProducts() {
     try {
@@ -34,6 +37,14 @@ const Edititem = () => {
   }, []);
   const handleCancle = () => {
     navigate('/admin')
+  }
+  const submitChanges = () => {}
+  const headerData = {
+    text:"Edit Product",
+    btnText:'Save Changes',
+    cancelFunction:handleCancle,
+    submitFunction:submitChanges,
+    payload:''
   }
   return (
     <>
