@@ -18,6 +18,12 @@ export const AdminProductListItemContainer = styled.li`
 export const AdminItemLeft = styled.div`
   display: flex;
   justify-content: space-between;
+  >img{
+    height: 80px;
+  }
+  >p{
+    margin-left: 10px;
+  }
 `;
 export const AdminItemRigth = styled.div`
   display: flex;
@@ -36,7 +42,7 @@ export const AdminItemRigth = styled.div`
     justify-content: center;
     border-radius: 2px;
     border: 1.5px solid var(--main-gray);
-    height: 50%;
+    height: 20px;
     font-size: 0.8rem;
     color: rgb(136, 136, 136);
     padding: 3px;

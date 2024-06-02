@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import {
+  AddImageInput,
+  AddImagesContainer,
+  AddImgBtn,
+  AddImgBtnContainer,
   AdminContainer,
   EditContainerTitle,
   EditDescription,
@@ -13,9 +17,12 @@ import { api } from "../../../services/api";
 import ProductNav from "../../products/ProductNav";
 import AdminEditHeader from "../../adminComponents/AdminEditHeader";
 import { useNavigate } from "react-router-dom";
+import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
+import RemoveCircleOutlineOutlinedIcon from '@mui/icons-material/RemoveCircleOutlineOutlined';
 
 const AddItem = () => {
   const navigate = useNavigate();
+  const [imgInpCount,setImgInpCount] = useState(1)
   const [newItem, setNewItem] = useState({
     title: "",
     category: "",
@@ -31,7 +38,7 @@ const AddItem = () => {
     const { name, value } = e.target;
     setNewItem((prevState) => ({
       ...prevState,
-      [name]: name === 'price' || name === 'rating' ? parseFloat(value) : value,
+      [name]: name === "price" || name === "rating" ? parseFloat(value) : value,
     }));
   };
 
@@ -48,7 +55,7 @@ const AddItem = () => {
       });
 
       if (!response.ok) {
-        throw new Error('failed to add');
+        throw new Error("failed to add");
       }
 
       setNewItem({
@@ -80,6 +87,9 @@ const AddItem = () => {
     submitFunction: handleSubmit,
   };
 
+  const handleRemoveImageInput = (indexToRemove) => {
+    setImgInpCount((prevCount) => prevCount.filter((_, index) => index !== indexToRemove));
+  };
   return (
     <>
       <ProductNav prev={"admin"} />
@@ -87,7 +97,42 @@ const AddItem = () => {
       <EdititemContainer>
         <EdititemImages>
           <EditContainerTitle>Product Images</EditContainerTitle>
-          {/* Additional UI for adding images can go here */}
+          <EditInputField>
+            <label htmlFor="thumbnail">Enter Thumbnail Image URL</label>
+            <input
+              type="text"
+              name="thumbnail"
+              id="thumbnail"
+              value={newItem.thumbnail}
+              onChange={handleChange}
+            />
+          </EditInputField>
+          <AddImagesContainer>
+            <AddImgBtnContainer>
+              <p>Add Product Images</p>
+            <AddImgBtn>
+              <AddCircleOutlineOutlinedIcon />
+              <span onClick={() => setImgInpCount(imgInpCount+1)}>Add Image</span>
+            </AddImgBtn>
+            </AddImgBtnContainer>
+
+            {/* <AddImageInput>
+              <input type="text" name="addimginp" id="addimginp" />
+              <span>
+                <RemoveCircleOutlineOutlinedIcon/>
+                Remove
+                </span>
+            </AddImageInput> */}
+            {Array.from({ length: imgInpCount }).map((_, index) => (
+          <AddImageInput key={index}>
+            <input type="text" name={`addimginp-${index}`} id={`addimginp-${index}`} />
+            <span onClick={() => handleRemoveImageInput(index)}>
+              <RemoveCircleOutlineOutlinedIcon  />
+              Remove
+            </span>
+          </AddImageInput>
+        ))}
+          </AddImagesContainer>
         </EdititemImages>
         <EdititemProductData>
           <EditContainerTitle>Product Details</EditContainerTitle>

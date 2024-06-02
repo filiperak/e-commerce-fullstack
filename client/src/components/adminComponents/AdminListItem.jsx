@@ -14,7 +14,7 @@ const AdminListItem = ({data,handleDelete}) => {
   return (
     <AdminProductListItemContainer>
         <AdminItemLeft>
-            <img src={data.image} alt={data.title} />
+            <img src={data.thumbnail} alt={data.title} />
             <p>{data.title}</p>
             <p>{`$${data.price}`}</p>
         </AdminItemLeft>
