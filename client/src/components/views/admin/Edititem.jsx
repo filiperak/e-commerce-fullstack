@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { api } from "../../../services/api";
 import {
+  AddImageInput,
+  AddImagesContainer,
+  AddImgBtn,
+  AddImgBtnContainer,
   EditContainerTitle,
   EditDescription,
   EditHeader,
@@ -13,10 +17,13 @@ import {
 } from "./styled";
 import ProductNav from "../../products/ProductNav";
 import AdminEditHeader from "../../adminComponents/AdminEditHeader";
+import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
+import RemoveCircleOutlineOutlinedIcon from "@mui/icons-material/RemoveCircleOutlineOutlined";
 
 const Edititem = () => {
   const { _id } = useParams();
   const [item, setItem] = useState({});
+  const [imageInputs, setImageInputs] = useState(1);
   const navigate = useNavigate()
   async function getProducts() {
     try {
@@ -24,6 +31,7 @@ const Edititem = () => {
       const result = await response.json();
       if (result) {
         setItem(result);
+        setImageInputs(result.images.length)
       }
     } catch (error) {
       console.log(error);
@@ -42,7 +50,7 @@ const Edititem = () => {
     const { name, value } = e.target;
     setItem((prevState) => ({
       ...prevState,
-      [name]: name === 'price' || name === 'rating' ? parseFloat(value) : value,
+      [name]: name === 'price' || name === 'rating' ? Number(value) : value,
     }));
   };
 
@@ -73,6 +81,26 @@ const Edititem = () => {
     cancelFunction:handleCancle,
     submitFunction:submitChanges
   }
+
+  const handleAddImageInput = () => {
+    setImageInputs(imageInputs + 1);
+    setItem((prevState) => ({
+      ...prevState,
+      images: [...prevState.images, ""], 
+    }));
+  };;
+
+  const handleRemoveImageInput = (removeIndex) => {
+    setImageInputs(imageInputs - 1);
+    setItem((prevState) => ({
+      ...prevState,
+      images: prevState.images.filter((_, index) => index !== removeIndex),
+    }));
+  };
+  const [imgHelper,setImgHelper] = useState(undefined)
+  useEffect(() => {
+    setImgHelper(item.images)
+  },[item])
   return (
     <>
       <ProductNav productName={item.title} prev={'admin'} />
@@ -80,7 +108,52 @@ const Edititem = () => {
       <EdititemContainer>
         <EdititemImages>
           <EditContainerTitle>Edit Product Images</EditContainerTitle>
-          123
+         
+          <EditInputField>
+            <label htmlFor="thumbnail">Enter Thumbnail Image URL</label>
+            <input
+              type="text"
+              name="thumbnail"
+              id="thumbnail"
+              value={item.thumbnail}
+              onChange={handleChange}
+            />
+          </EditInputField>
+          <AddImagesContainer>
+            <AddImgBtnContainer>
+              <p>Add Product Images</p>
+              <AddImgBtn>
+                <AddCircleOutlineOutlinedIcon />
+                <span onClick={handleAddImageInput}>Add Image</span>
+              </AddImgBtn>
+            </AddImgBtnContainer>
+
+            {Array.from({ length: imageInputs }).map((_, index) => (
+              <AddImageInput key={index}>
+                <input
+                  type="text"
+                  name={`addimginp-${index}`}
+                  id={`addimginp-${index}`}
+                  // value={ item.images[index] || ""}
+                  value={imgHelper[index]}  //ERROR OVDE!!!!!
+                  onChange={(e) => {
+                    const newImages = [...item.images];
+                    newImages[index] = e.target.value;
+                    setItem((prevState) => ({
+                      ...prevState,
+                      images: newImages,
+                    }));
+                  }}
+                />
+                <span onClick={() => handleRemoveImageInput(index)}>
+                  <RemoveCircleOutlineOutlinedIcon />
+                  Remove
+                </span>
+              </AddImageInput>
+            ))}
+          </AddImagesContainer>
+
+
         </EdititemImages>
         <EdititemProductData>
           <EditContainerTitle>Edit Product Details</EditContainerTitle>
