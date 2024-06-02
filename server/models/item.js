@@ -17,6 +17,7 @@ const ItemSchema = new mongoose.Schema({
     type:String,
    },
    images:[String],
+   rating:Number,
    brand:String,
    description:String,
 })

@@ -48,7 +48,7 @@ const AddItem = () => {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to add item");
+        throw new Error('failed to add');
       }
 
       setNewItem({

@@ -34,7 +34,7 @@ router.post('/', async (req,res) => {
 })
 
 router.patch('/:id', getItems, async (req, res) => {
-    const updates = ['title', 'category', 'price', 'thumbnail', 'images', 'brand', 'description'];
+    const updates = ['title', 'category', 'price', 'thumbnail', 'images', 'brand', 'description','rating'];
     
     updates.forEach(elem => {
         if (req.body[elem] != null) {
