@@ -18,11 +18,11 @@ import ProductNav from "../../products/ProductNav";
 import AdminEditHeader from "../../adminComponents/AdminEditHeader";
 import { useNavigate } from "react-router-dom";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
-import RemoveCircleOutlineOutlinedIcon from '@mui/icons-material/RemoveCircleOutlineOutlined';
+import RemoveCircleOutlineOutlinedIcon from "@mui/icons-material/RemoveCircleOutlineOutlined";
 
 const AddItem = () => {
   const navigate = useNavigate();
-  const [imgInpCount,setImgInpCount] = useState(1)
+  const [imageInputs, setImageInputs] = useState(1);
   const [newItem, setNewItem] = useState({
     title: "",
     category: "",
@@ -38,7 +38,7 @@ const AddItem = () => {
     const { name, value } = e.target;
     setNewItem((prevState) => ({
       ...prevState,
-      [name]: name === "price" || name === "rating" ? parseFloat(value) : value,
+      [name]: name === "price" || name === "rating" ? Number(value) : value,
     }));
   };
 
@@ -87,9 +87,18 @@ const AddItem = () => {
     submitFunction: handleSubmit,
   };
 
-  const handleRemoveImageInput = (indexToRemove) => {
-    setImgInpCount((prevCount) => prevCount.filter((_, index) => index !== indexToRemove));
+  const handleAddImageInput = () => {
+    setImageInputs(imageInputs + 1);
   };
+
+  const handleRemoveImageInput = (indexToRemove) => {
+    setImageInputs(imageInputs - 1);
+    setNewItem((prevState) => ({
+      ...prevState,
+      images: prevState.images.filter((_, index) => index !== indexToRemove),
+    }));
+  };
+
   return (
     <>
       <ProductNav prev={"admin"} />
@@ -110,28 +119,34 @@ const AddItem = () => {
           <AddImagesContainer>
             <AddImgBtnContainer>
               <p>Add Product Images</p>
-            <AddImgBtn>
-              <AddCircleOutlineOutlinedIcon />
-              <span onClick={() => setImgInpCount(imgInpCount+1)}>Add Image</span>
-            </AddImgBtn>
+              <AddImgBtn>
+                <AddCircleOutlineOutlinedIcon />
+                <span onClick={handleAddImageInput}>Add Image</span>
+              </AddImgBtn>
             </AddImgBtnContainer>
 
-            {/* <AddImageInput>
-              <input type="text" name="addimginp" id="addimginp" />
-              <span>
-                <RemoveCircleOutlineOutlinedIcon/>
-                Remove
+            {Array.from({ length: imageInputs }).map((_, index) => (
+              <AddImageInput key={index}>
+                <input
+                  type="text"
+                  name={`addimginp-${index}`}
+                  id={`addimginp-${index}`}
+                  value={newItem.images[index] || ""}
+                  onChange={(e) => {
+                    const newImages = [...newItem.images];
+                    newImages[index] = e.target.value;
+                    setNewItem((prevState) => ({
+                      ...prevState,
+                      images: newImages,
+                    }));
+                  }}
+                />
+                <span onClick={() => handleRemoveImageInput(index)}>
+                  <RemoveCircleOutlineOutlinedIcon />
+                  Remove
                 </span>
-            </AddImageInput> */}
-            {Array.from({ length: imgInpCount }).map((_, index) => (
-          <AddImageInput key={index}>
-            <input type="text" name={`addimginp-${index}`} id={`addimginp-${index}`} />
-            <span onClick={() => handleRemoveImageInput(index)}>
-              <RemoveCircleOutlineOutlinedIcon  />
-              Remove
-            </span>
-          </AddImageInput>
-        ))}
+              </AddImageInput>
+            ))}
           </AddImagesContainer>
         </EdititemImages>
         <EdititemProductData>
