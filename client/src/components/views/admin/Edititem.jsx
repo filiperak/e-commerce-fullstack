@@ -19,22 +19,31 @@ import ProductNav from "../../products/ProductNav";
 import AdminEditHeader from "../../adminComponents/AdminEditHeader";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 import RemoveCircleOutlineOutlinedIcon from "@mui/icons-material/RemoveCircleOutlineOutlined";
+import Loading from "../../states/Loading";
+import Error from "../../states/Error";
 
 const Edititem = () => {
   const { _id } = useParams();
   const [item, setItem] = useState({});
   const [imageInputs, setImageInputs] = useState(1);
   const navigate = useNavigate()
+  const [loading,setLoading] = useState(false);
+  const [errorMsg,setErrorMsg] = useState(null);  
+
   async function getProducts() {
     try {
+      setLoading(true)
       const response = await fetch(`${api}/items/${_id}`);
       const result = await response.json();
       if (result) {
         setItem(result);
         setImageInputs(result.images.length)
+        setLoading(false)
       }
     } catch (error) {
       console.log(error);
+      setLoading(false)
+      setErrorMsg(error.message);
     }
   }
 
@@ -97,10 +106,9 @@ const Edititem = () => {
       images: prevState.images.filter((_, index) => index !== removeIndex),
     }));
   };
-  const [imgHelper,setImgHelper] = useState(undefined)
-  useEffect(() => {
-    setImgHelper(item.images)
-  },[item])
+  if(loading) return <Loading/>
+  if(errorMsg !== null) return <Error msg={errorMsg}/>
+
   return (
     <>
       <ProductNav productName={item.title} prev={'admin'} />
@@ -121,7 +129,7 @@ const Edititem = () => {
           </EditInputField>
           <AddImagesContainer>
             <AddImgBtnContainer>
-              <p>Add Product Images</p>
+              <p>Edit Product Images</p>
               <AddImgBtn>
                 <AddCircleOutlineOutlinedIcon />
                 <span onClick={handleAddImageInput}>Add Image</span>
@@ -134,8 +142,8 @@ const Edititem = () => {
                   type="text"
                   name={`addimginp-${index}`}
                   id={`addimginp-${index}`}
-                  // value={ item.images[index] || ""}
-                  value={imgHelper[index]}  //ERROR OVDE!!!!!
+                   //value={ item.images[index] || ''}
+                   value={'*****'}
                   onChange={(e) => {
                     const newImages = [...item.images];
                     newImages[index] = e.target.value;

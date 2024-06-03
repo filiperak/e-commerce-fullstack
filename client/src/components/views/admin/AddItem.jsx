@@ -19,9 +19,13 @@ import AdminEditHeader from "../../adminComponents/AdminEditHeader";
 import { useNavigate } from "react-router-dom";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 import RemoveCircleOutlineOutlinedIcon from "@mui/icons-material/RemoveCircleOutlineOutlined";
+import Loading from "../../states/Loading";
+import Error from "../../states/Error";
 
 const AddItem = () => {
   const navigate = useNavigate();
+  const [loading,setLoading] = useState(false);
+  const [errorMsg,setErrorMsg] = useState(null);  
   const [imageInputs, setImageInputs] = useState(1);
   const [newItem, setNewItem] = useState({
     title: "",
@@ -46,6 +50,7 @@ const AddItem = () => {
     e.preventDefault();
     console.log(JSON.stringify(newItem));
     try {
+      setLoading(true)
       const response = await fetch(`${api}/items/`, {
         method: "POST",
         headers: {
@@ -56,6 +61,8 @@ const AddItem = () => {
 
       if (!response.ok) {
         throw new Error("failed to add");
+      }else{
+        setLoading(false)
       }
 
       setNewItem({
@@ -73,6 +80,8 @@ const AddItem = () => {
       navigate("/admin");
     } catch (error) {
       console.error("Error:", error.message);
+      setLoading(false)
+      setErrorMsg(error.message)
     }
   };
 
@@ -98,6 +107,9 @@ const AddItem = () => {
       images: prevState.images.filter((_, index) => index !== indexToRemove),
     }));
   };
+  
+  if(loading) return <Loading/>
+  if(errorMsg !== null) return <Error msg={errorMsg}/>
 
   return (
     <>
