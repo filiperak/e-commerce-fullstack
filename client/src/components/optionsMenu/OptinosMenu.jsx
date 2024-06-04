@@ -6,25 +6,24 @@ import { CategoryContext } from "../../context/CategoryContext";
 
 
 const OptionsMenu = () => {
-  const [options, setOptions] = useState([]);
+  const [options, setOptions] = useState(["beauty","fragrances","furniture","groceries","home-decoration","kitchen-accessories","laptops","mens-shirts","mens-shoes","mens-watches","mobile-accessories","motorcycle","skin-care","smartphones","sports-accessories","sunglasses","tablets","tops","vehicle","womens-bags","womens-dresses","womens-jewellery","womens-shoes","womens-watches"]);
   const {categoryState,categoryDispatch} = useContext(CategoryContext)
 
-  useEffect(() => {
-    fetchOptions(api);
-  }, []);
-  async function fetchOptions(url) {
-    try {
-      const response = await fetch(`${url}/category`);
-      const result = await response.json();
-      if (result && result[0].categories.length > 0) {
-        setOptions(result[0].categories);
-        console.log(options);
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
+  // useEffect(() => {
+  //   fetchOptions(api);
+  // }, []);
+  // async function fetchOptions(url) {
+  //   try {
+  //     const response = await fetch(`${url}/category`);
+  //     const result = await response.json();
+  //     if (result && result[0].categories.length > 0) {
+  //       setOptions(result[0].categories);
+  //       console.log(options);
+  //     }
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // }
   const handleChange = (event) => {
     categoryDispatch({
       type:'SET_CATEGORY',category:event.target.value
