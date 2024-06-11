@@ -14,6 +14,22 @@ Content-Type: application/json
     "brand": "testbrand",
     "description": "testdescription"
 }
+###
+
+GET http://localhost:5000/user
+
+
+###
+
+POST http://localhost:5000/user
+Content-Type: application/json
+
+{
+    "username":"userservice-test",
+    "email":"testservice@mail.com",
+    "password":"servicepassword"
+}
+
 
 
 ###
