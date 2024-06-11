@@ -9,6 +9,18 @@ class UserService {
     }
   }
 
+  static async getUserById(id){
+    try {
+        const user = await User.findById(id);
+        if (!user) {
+          throw new Error('no user');
+        }
+        return user;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+  }
+
   static async createUser(userData) {
     const { username, email, password } = userData;
     const user = new User({

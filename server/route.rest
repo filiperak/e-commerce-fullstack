@@ -21,6 +21,10 @@ GET http://localhost:5000/user
 
 ###
 
+GET http://localhost:5000/user/666883f8d4ba60f02dfa5b05
+
+###
+
 POST http://localhost:5000/user
 Content-Type: application/json
 
