@@ -21,6 +21,10 @@ export const HeaderContainer = styled.header`
     }
 
 `;
+export const HeaderArrow = styled.div`
+    flex: 0.1;
+`;
+
 export const SearchBar = styled.form`
     display: flex;
     border-radius: 4px;
@@ -40,11 +44,11 @@ export const SearchBar = styled.form`
     }
 `;
 export const HeaderRigth = styled.div`
-    flex:0.1;
+    flex:0.2;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
-    margin-right: 2%;
+    margin:0 2%;
     > .MuiSvgIcon-root:first-child{
         margin-right: auto;
     }
@@ -73,5 +77,26 @@ export const Recommended = styled.ul`
     >li:hover{
         background-color: var(--main-gray);
         border-radius: 4px;
+    }
+`;
+export const HeaderIconContainer = styled.div`
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    margin: 0 4%;
+    >span{
+        position: absolute;
+    }
+    &:hover{
+        color: var(--main-orange);
+    }
+    >div{
+        display: flex;
+        align-items: center;
+    }
+    >P{
+        margin: 0;
+        padding: 0;
+        font-size: 0.7rem;
     }
 `;

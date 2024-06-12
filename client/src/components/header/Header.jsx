@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { ReactComponent as Arrow } from "../../assets/arrow.svg";
-import { HeaderContainer, HeaderRigth, Recommended, SearchBar } from "./styled";
+import { HeaderContainer, HeaderRigth, Recommended, SearchBar,HeaderIconContainer,HeaderArrow } from "./styled";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import SearchIcon from "@mui/icons-material/Search";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import { useNavigate } from "react-router-dom";
 import OptionsMenu from "../optionsMenu/OptinosMenu";
 import { CartContext } from "../../context/CartContext";
@@ -42,7 +43,9 @@ const Header = ({ handleInput, productItems }) => {
 
   return (
     <HeaderContainer>
+      <HeaderArrow>
       <Arrow onClick={() => navigate("/")} />
+      </HeaderArrow>
       <SearchBar onSubmit={handleSubmit}>
         <OptionsMenu />
         <input
@@ -77,9 +80,22 @@ const Header = ({ handleInput, productItems }) => {
         <SearchIcon onClick={handleSubmit}/>
       </SearchBar>
       <HeaderRigth>
-        <PersonOutlineIcon onClick={() => navigate('/admin')}/>
+        {/* <AdminPanelSettingsIcon onClick={() => navigate('/admin')}/>
         <ShoppingCartIcon onClick={() => navigate("/cart")} />
-        <span>{cartState && cartState.length}</span>
+        <span>{cartState && cartState.length}</span> */}
+        <HeaderIconContainer onClick={() => navigate('/')}>
+          <PersonOutlineIcon/>
+          <p>Profile</p>
+        </HeaderIconContainer>
+        <HeaderIconContainer onClick={() => navigate('/admin')}>
+          <AdminPanelSettingsIcon/>
+          <p>Admin</p>
+        </HeaderIconContainer>
+        <HeaderIconContainer onClick={() => navigate("/cart")}>
+          <ShoppingCartIcon/>
+          <span>{cartState && cartState.length}</span>
+          <p>Cart</p>
+        </HeaderIconContainer>
       </HeaderRigth>
     </HeaderContainer>
   );
