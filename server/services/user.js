@@ -5,7 +5,7 @@ class UserService {
     try {
       return await User.find();
     } catch (error) {
-      throw new MongoExpiredSessionError(error.message);
+      throw new Error(error.message);
     }
   }
 
