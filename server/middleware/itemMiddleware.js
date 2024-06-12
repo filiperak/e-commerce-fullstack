@@ -13,3 +13,5 @@ const getItems = async (req, res, next) => {
 };
 
 module.exports = getItems;
+
+//ZA SAD SE NE KORISTI NIGDE

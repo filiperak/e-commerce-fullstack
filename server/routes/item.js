@@ -1,17 +1,22 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const getItems = require('../middleware/itemMiddleware')
-const {getAllItems,getSingleItem,updateItem,createItem,deleteItem} = require('../controllers/item')
+//const getItems = require("../middleware/itemMiddleware");
+const {
+  getAllItems,
+  getItemById,
+  updateItem,
+  createItem,
+  deleteItem,
+} = require("../controllers/item");
 
-router.get('/', getAllItems);
+router.get("/", getAllItems);
 
-router.get('/:id', getItems, getSingleItem);
+router.get("/:id", getItemById);
 
-router.post('/', createItem);
+router.post("/", createItem);
 
-router.patch('/:id', getItems, updateItem);
+router.patch("/:id", updateItem);
 
-router.delete('/:id', getItems, deleteItem);
-
+router.delete("/:id", deleteItem);
 
 module.exports = router;
