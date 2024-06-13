@@ -11,6 +11,7 @@ import Admin from "./components/views/admin/Admin";
 import AddItem from "./components/views/admin/AddItem";
 import Edititem from "./components/views/admin/Edititem";
 import Profile from "./components/views/profile/Profile";
+import { UserContextProvider } from "./context/UserContext";
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
   return (
     <div className="App">
       <Router>
+        <UserContextProvider>
         <CartContextProvider>
           <CategoryContextProvider>
             <Header handleInput={setSearchInput} productItems={productItems} />
@@ -41,6 +43,7 @@ function App() {
             </Routes>
           </CategoryContextProvider>
         </CartContextProvider>
+        </UserContextProvider>
       </Router>
     </div>
   );

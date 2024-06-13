@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import ProductNav from "../../products/ProductNav";
 import {
   ProfileContainer,
@@ -12,8 +12,10 @@ import { api } from "../../../services/api";
 import Loading from "../../states/Loading";
 import Error from "../../states/Error";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../../context/UserContext";
 
 const Profile = () => {
+  const {setLoggedUser} = useContext(UserContext)
   const [tab, setTab] = useState(true);
   const [logError, setLogError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -67,6 +69,7 @@ const Profile = () => {
       setLoading(false);
       console.log("Login successful:", user);
       // //////////////////////////////////////////////////////
+      setLoggedUser(user)
     } catch (error) {
       setLoading(false);
       setLogError(error.message);
@@ -86,7 +89,8 @@ const Profile = () => {
       if (!response.ok) {
         throw new Error("failed to add");
       } else {
-        console.log(profileCreate);
+        const user = await response.json()
+        setLoggedUser(user)
         setLoading(false);
         navigate("/");
       }
