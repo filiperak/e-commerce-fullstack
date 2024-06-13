@@ -20,8 +20,7 @@ class ItemsServices {
   }
 
   static async createItem(itemData) {
-    const { title, category, price, thumbnail, images, brand, description } =
-      itemData;
+    const { title, category, price, thumbnail, images, brand, description } = itemData;
     const item = new Items({
       title,
       category,
