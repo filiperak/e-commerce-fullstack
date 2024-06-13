@@ -1,4 +1,4 @@
-import styled from "styled-components";
+ import styled from "styled-components";
 
 export const HeaderContainer = styled.header`
     background-color: var(--main-gray);
@@ -19,10 +19,18 @@ export const HeaderContainer = styled.header`
     >svg{
         cursor: pointer;
     }
+    @media(max-width: 600px) {
+        flex-direction: column-reverse; 
+        align-items: reverse;
+        padding: 6px; 
+    }
 
 `;
 export const HeaderArrow = styled.div`
     flex: 0.1;
+    @media(max-width: 600px) {
+        display: none; 
+    }
 `;
 
 export const SearchBar = styled.form`
@@ -33,7 +41,7 @@ export const SearchBar = styled.form`
     flex: 0.7;
     >input{
         border: none;
-        flex:0.9%;
+        flex:1
     }
     >input:focus{
         outline: none;
@@ -42,6 +50,10 @@ export const SearchBar = styled.form`
     .MuiSvgIcon-root{
         margin: 2px;
     }
+    @media(max-width:600px){
+        width: 100%;
+    }
+
 `;
 export const HeaderRigth = styled.div`
     flex:0.2;
@@ -49,8 +61,14 @@ export const HeaderRigth = styled.div`
     justify-content: flex-end;
     align-items: center;
     margin:0 2%;
-    > .MuiSvgIcon-root:first-child{
-        margin-right: auto;
+    @media(max-width:600px){
+        width: 100%;
+        justify-content: space-between;
+        .MuiSvgIcon-root{
+        margin-top: 0;
+        margin-bottom: 2px;
+        font-size: 18px;
+    }
     }
 `;
 export const Recommended = styled.ul`

@@ -5,7 +5,12 @@
   --main-gray:#dedede;
   /* --main-orange:#261785; */
   --main-orange:#ffa500;
-  --main-component-margin:60px;
+  --main-component-margin:64px;
+}
+@media(max-width:600px){
+  :root{
+    --main-component-margin:76px;
+  }
 }
 body {
 
