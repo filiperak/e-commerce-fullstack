@@ -27,8 +27,22 @@ const createUser = async (req, res) => {
   }
 };
 
+const getUserByLogin = async (req,res) => {
+  try {
+    const user = await UserService.getUserByLogin(req.body)
+    res.status(200).json(user)
+  } catch (error) {
+    if (error.message === 'wrong username or password') {
+      res.status(404).json({ message: error.message });
+  } else {
+      res.status(400).json({ message: error.message });
+  }
+  }
+}
+
 module.exports = {
   getAllUsers,
   createUser,
   getUserById,
+  getUserByLogin,
 };

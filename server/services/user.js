@@ -35,6 +35,19 @@ class UserService {
       throw new Error(error.message);
     }
   }
+
+  static async getUserByLogin(data){
+    const {username,password} = data
+    try {
+      const user = await User.findOne({username,password})
+      if (!user) {
+        throw new Error('wrong username or password');
+      }
+      return user;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
 }
 
 module.exports = UserService;
