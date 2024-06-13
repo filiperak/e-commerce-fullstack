@@ -80,7 +80,7 @@ const Header = ({ handleInput, productItems }) => {
         <SearchIcon onClick={handleSubmit}/>
       </SearchBar>
       <HeaderRigth>
-        <HeaderIconContainer onClick={() => navigate('/')}>
+        <HeaderIconContainer onClick={() => navigate('/profile')}>
           <PersonOutlineIcon/>
           <p>Profile</p>
         </HeaderIconContainer>

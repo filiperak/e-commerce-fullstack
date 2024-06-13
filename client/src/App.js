@@ -10,6 +10,7 @@ import CartContextProvider from "./context/CartContext";
 import Admin from "./components/views/admin/Admin";
 import AddItem from "./components/views/admin/AddItem";
 import Edititem from "./components/views/admin/Edititem";
+import Profile from "./components/views/profile/Profile";
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <CategoryContextProvider>
             <Header handleInput={setSearchInput} productItems={productItems} />
             <Routes>
+              <Route path="/profile" element={<Profile/>} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/admin" element={<Admin/>}/>
               <Route path="/admin/new" element={<AddItem/>}/>
