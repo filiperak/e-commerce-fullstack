@@ -80,9 +80,6 @@ const Header = ({ handleInput, productItems }) => {
         <SearchIcon onClick={handleSubmit}/>
       </SearchBar>
       <HeaderRigth>
-        {/* <AdminPanelSettingsIcon onClick={() => navigate('/admin')}/>
-        <ShoppingCartIcon onClick={() => navigate("/cart")} />
-        <span>{cartState && cartState.length}</span> */}
         <HeaderIconContainer onClick={() => navigate('/')}>
           <PersonOutlineIcon/>
           <p>Profile</p>
