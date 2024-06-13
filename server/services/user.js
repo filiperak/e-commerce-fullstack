@@ -27,6 +27,7 @@ class UserService {
       username,
       email,
       password,
+      cart:[]
     });
 
     try {
@@ -47,6 +48,15 @@ class UserService {
     } catch (error) {
       throw new Error(error.message);
     }
+  }
+  static async userAddToCart(){
+    
+  }
+  static async userRemoveFromToCart(){
+
+  }
+  static async userEmptyToCart(){
+
   }
 }
 

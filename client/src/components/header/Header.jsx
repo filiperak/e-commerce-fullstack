@@ -8,6 +8,7 @@ import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import { useNavigate } from "react-router-dom";
 import OptionsMenu from "../optionsMenu/OptinosMenu";
 import { CartContext } from "../../context/CartContext";
+import { UserContext } from "../../context/UserContext";
 
 const Header = ({ handleInput, productItems }) => {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ const Header = ({ handleInput, productItems }) => {
   const [inputVal, setInputVal] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const {cartState} = useContext(CartContext);
+  const {loggedUser} = useContext(UserContext)
 
   //handleInput(inputVal);    OBRATI PAZNJU STA SE OVDE DESILO
 
@@ -82,7 +84,7 @@ const Header = ({ handleInput, productItems }) => {
       <HeaderRigth>
         <HeaderIconContainer onClick={() => navigate('/profile')}>
           <PersonOutlineIcon/>
-          <p>Profile</p>
+          {loggedUser !== null ? <p>{loggedUser.username}</p> : <p>Profile</p>}
         </HeaderIconContainer>
         <HeaderIconContainer onClick={() => navigate('/admin')}>
           <AdminPanelSettingsIcon/>
