@@ -16,7 +16,9 @@ class ItemsServices {
         throw new Error("no items");
       }
       return item;
-    } catch (error) {}
+    } catch (error) {
+      throw new Error(error.message);
+    }
   }
 
   static async createItem(itemData) {
